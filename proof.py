@@ -1,7 +1,7 @@
 from collections import deque
 
 import inference
-import sentence2 as sentence
+import sentence
 import line
 import util
 import printers

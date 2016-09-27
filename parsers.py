@@ -1,4 +1,4 @@
-import sentence2 as sentence
+import sentence
 
 sf = sentence.sf
 
