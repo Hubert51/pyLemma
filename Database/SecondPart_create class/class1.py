@@ -5,6 +5,10 @@ and SQL
 These codes are the functions part in my database project. The first function is
 initial the program. The create_table(self,information)
 
+I need to talk with group members to know what kind of operations they want to 
+have, such as finding the average, finding the course. Then I should write such
+function for them.
+
 """
 
 import sqlite3
