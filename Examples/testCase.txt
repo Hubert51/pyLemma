@@ -1,0 +1,8 @@
+include Rules/F Rules.inf
+
+proof
+"KS1"
+1	A	Assumption
+2	B	Assumption
+done
+

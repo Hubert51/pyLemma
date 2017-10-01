@@ -1,0 +1,12 @@
+include Rules/F Rules.inf
+
+proof
+"KS1" - Sub 1
+1	A	Assumption
+done
+
+proof
+"KS1"
+1	|-(@A, Contradiction)	"KS1" - Sub 1
+2	not(A)	Not Intro	1
+done
