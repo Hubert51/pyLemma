@@ -1,4 +1,4 @@
-include		$Lemma/Rules/F Rules - FO.inf
+include		Rules/F Rules - FO.inf
 
 # There is exactly one Werewolf
 #	or(or(or(and(and(and(W(a),not(W(b))),not(W(c)),not(W(d)))),and(and(and(not(W(a)),W(b)),not(W(c))),not(W(d)))),and(and(and(not(W(a)),not(W(b))),W(c)),not(W(d)))),and(and(and(not(W(a)),not(W(b))),not(W(c))),W(d)))
@@ -26,7 +26,6 @@ D	iff(K(d),iff(K(a),ForAll(x,if(W(x),K(x)))))																										Assumptio
 7	not(W(b))																																		And Elim Right	4
 8	or(W(c),ForAll(x,if(W(x),not(K(x)))))																											Or Intro Left	5
 9	K(b)																																			Iff Elim Right	B,8
-10	
 done
 
 proof
@@ -56,7 +55,6 @@ D	iff(K(d),iff(K(a),ForAll(x,if(W(x),K(x)))))																						Assumption
 7	not(W(b))																														And Elim Right	4
 8	or(K(a),not(W(c)))																												Or Intro Right	5
 9	K(c)																															Iff Elim Right	C,8
-10	
 done
 
 proof
