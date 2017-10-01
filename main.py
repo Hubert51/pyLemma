@@ -88,6 +88,8 @@ try:
 
         print printProof(tstPrf[proof])
 
+
+
         # Check that it is valid
         valid = tstPrf[proof].verify()
         if valid is True:
@@ -132,4 +134,4 @@ try:
             print('A proof with the name %s does not exist\n' % proofName)
 
 except (parsers.LineError, IOError) as e:
-    print(e)
+    print(u'%s',e)
