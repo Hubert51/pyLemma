@@ -2,7 +2,7 @@
 1. The assumptions and derivations should be splitted into different steps(sub proof)
 
 ## Syntax of proof operation:
-1. not syntax
+1. "not" syntax
 ```proof
 "KS1" - Sub 1         
 1	A	Assumption
