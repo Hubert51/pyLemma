@@ -1,8 +1,10 @@
+
 import sys
 import os.path
 
 import parsers
 import printers
+
 
 # Python 3 compatibility
 #import six
@@ -19,119 +21,145 @@ def isProofValid(filenameOrString):
                 return False
         return True
     except (parsers.LineError, IOError) as e:
-        return False   
+        return False
 
-filename = ''
-if len(sys.argv) > 1:
-    filename = sys.argv[1]
+def pyLemma(fileFromWeb="test.txt"):
+    filename = ''
+    if len(sys.argv) > 1:
+        filename = sys.argv[1]
 
-done = False
-if len(sys.argv) > 2 and sys.argv[2].lower() == 'nooutput':
-    done = True
+    done = False
+    if len(sys.argv) > 2 and sys.argv[2].lower() == 'nooutput':
+        done = True
 
 
-# Check if we have a valid file
-if not os.path.isfile(filename):
-    # Try to open a file select box
-    try:
-        import tkinter as tk
-    except ImportError:
-        import Tkinter as tk
-        
-    try:
-        import tkFileDialog as tfd
-    except ImportError:
-        from tkinter import filedialog as tfd
-        
-    root = tk.Tk()
-    root.withdraw()
-    filename = tfd.askopenfilename()       
-        
-    '''try:
-        
-        import tkFileDialog
-        
-        root = tk.Tk()
-        root.withdraw()            
-        filename = tkFileDialog.askopenfilename()
-    except ImportError:    
+    # Check if we have a valid file
+    if not os.path.isfile(filename):
+        # Try to open a file select box
         try:
-            from tkinter import filedialog
-            
+            import tkinter as tk
+        except ImportError:
+            import Tkinter as tk
+
+        try:
+            import tkFileDialog as tfd
+        except ImportError:
+            from tkinter import filedialog as tfd
+
+
+
+        if fileFromWeb!= "1":
+            # file_ = open("Examples/KS1 from F.txt")
+            # print file_.read()
+            filename = os.getcwd()
+            # filename = filename.decode()
+            dir_path = os.path.dirname(os.path.realpath(__file__))
+            dir_path = unicode(dir_path, "utf-8")
+            filename = u"/Examples/"+fileFromWeb
+            filename = dir_path+filename
+
+
+            print dir_path
+
+        else:
             root = tk.Tk()
             root.withdraw()
-            filename = filedialog.askopenfilename()            
+            filename = tfd.askopenfilename()
+
+
+        '''try:
+            
+            import tkFileDialog
+            
+            root = tk.Tk()
+            root.withdraw()            
+            filename = tkFileDialog.askopenfilename()
+        except ImportError:    
+            try:
+                from tkinter import filedialog
                 
-        except ImportError:
-            print('Invalid file')
-'''
+                root = tk.Tk()
+                root.withdraw()
+                filename = filedialog.askopenfilename()            
+                    
+            except ImportError:
+                print('Invalid file')
+    '''
 
 
-try:
-    
-    printProof = lambda x: printers.defaultProofPrinter(x, sentencePrinter = printers.prefixSentencePrinter)
-    
-    #syntax = {'+': '({0} + {1})','*': '({0}*{1})', 'Div':'{0} divides {1}', 's':'s{0}', 'Prime':'{0} is prime', '<':'({0} < {1})'}
-    #printProof = lambda x: printers.englishProofPrinter(x, howToPrint=syntax)
-    
-    #printProof = lambda x: printers.compressedProofPrinter(x, sentencePrinter = printers.prefixSentencePrinter)
-    
-    # parse the supplied file
-    tstPrf = parsers.defaultProofParser(filename)
+    try:
 
-    # Set the line numbering to start at 1 (instead of the default 0)
-    [tstPrf[i].setNumbering(lambda x: x+1) for i in tstPrf]
+        printProof = lambda x: printers.defaultProofPrinter(x, sentencePrinter = printers.prefixSentencePrinter)
 
-    validTracker = set([])
-    for proof in tstPrf:
-        # Print each proof that was parsed
+        #syntax = {'+': '({0} + {1})','*': '({0}*{1})', 'Div':'{0} divides {1}', 's':'s{0}', 'Prime':'{0} is prime', '<':'({0} < {1})'}
+        #printProof = lambda x: printers.englishProofPrinter(x, howToPrint=syntax)
 
-        print printProof(tstPrf[proof])
+        #printProof = lambda x: printers.compressedProofPrinter(x, sentencePrinter = printers.prefixSentencePrinter)
 
+        # parse the supplied file
+        tstPrf = parsers.defaultProofParser(filename)
 
+        # Set the line numbering to start at 1 (instead of the default 0)
+        [tstPrf[i].setNumbering(lambda x: x+1) for i in tstPrf]
 
-        # Check that it is valid
-        valid = tstPrf[proof].verify()
-        if valid is True:
-            validTracker.add(proof)
-            # If it is valid, print it
-            print('Valid\n--------------------------\n')
-        else:
-            # If it is not valid, print the line number of the error
-            print('Invalid:\tError on line %d' % valid)
-            print('--------------------------\n')
+        validTracker = set([])
+        output = ""
+        for proof in tstPrf:
+            # Print each proof that was parsed
 
-    print('%s of %s are Valid'  % (len(validTracker), len(tstPrf)))
-    
-    prfNamesSorted = [i for i in tstPrf]
-    prfNamesSorted.sort()
-    for proofName in prfNamesSorted:
-        #Print the name of each proof that was parsed
-        print('%-70s%s' % (proofName, proofName in validTracker))
-
-    while not done:
-        # Get the name of the proof to check
-        proofName = raw_input('Which proof would you like to print?  (type done to exit) ')
-
-        # Check to see if we should quit
-        if proofName.lower() in ['done', 'q', 'quit', 'exit', '']:
-            break
-
-
-        elif proofName in tstPrf:
-            #print(tstPrf[proofName])
             print printProof(tstPrf[proof])
+            output += printProof(tstPrf[proof])+'\n'
+
+
             # Check that it is valid
-            valid = tstPrf[proofName].verify()
+            valid = tstPrf[proof].verify()
             if valid is True:
+                validTracker.add(proof)
                 # If it is valid, print it
                 print('Valid\n--------------------------\n')
+                output += 'Valid\n--------------------------\n'+'\n'
             else:
                 # If it is not valid, print the line number of the error
-                print('Invalid:\tError on line %d\n' % valid)	
+                print('Invalid:\tError on line %d' % valid)
+                print('--------------------------\n')
+                output += 'Invalid:\tError on line %d\n' % valid
+                output += '--------------------------\n\n'
 
-        else:
-            print('A proof with the name %s does not exist\n' % proofName)
+        return output
+        print('%s of %s are Valid'  % (len(validTracker), len(tstPrf)))
 
-except (parsers.LineError, IOError) as e:
-    print(u'%s',e)
+        prfNamesSorted = [i for i in tstPrf]
+        prfNamesSorted.sort()
+        for proofName in prfNamesSorted:
+            #Print the name of each proof that was parsed
+            print('%-70s%s' % (proofName, proofName in validTracker))
+
+        while not done:
+            # Get the name of the proof to check
+            proofName = raw_input('Which proof would you like to print?  (type done to exit) ')
+
+            # Check to see if we should quit
+            if proofName.lower() in ['done', 'q', 'quit', 'exit', '']:
+                break
+
+
+            elif proofName in tstPrf:
+                #print(tstPrf[proofName])
+                print printProof(tstPrf[proof])
+                # Check that it is valid
+                valid = tstPrf[proofName].verify()
+                if valid is True:
+                    # If it is valid, print it
+                    print('Valid\n--------------------------\n')
+                else:
+                    # If it is not valid, print the line number of the error
+                    print('Invalid:\tError on line %d\n' % valid)
+
+            else:
+                print('A proof with the name %s does not exist\n' % proofName)
+
+    except (parsers.LineError, IOError) as e:
+        print(u'%s',e)
+if __name__=="__main__":
+    output = pyLemma()
+    print output
