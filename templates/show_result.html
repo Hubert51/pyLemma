@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Result</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<style type="text/css">
+		textarea{
+			width:50%;
+			height: 1500px;
+			border-width: 0px;
+			font-size: 15px;
+/*			BORDER-BOTTOM: 0px solid; 
+			BORDER-LEFT: 0px solid; 
+			BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;*/
+		}
+		div{
+			text-align: center;
+		}
+	</style>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+
+			function textAreaAdjust(o) {
+			  o.style.height = "1px";
+			  o.style.height = (25+o.scrollHeight)+"px";
+			}
+		});
+	</script>
+</head>
+<body>
+<div>
+	<textarea onkeyup="textAreaAdjust(this)" style="overflow:hidden">{{items}}</textarea>	
+</div>
+</body>
+</html>

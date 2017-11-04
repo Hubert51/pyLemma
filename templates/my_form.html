@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$("#parentOfTextbox").on('keydown', '#textbox', function(e) { 
+		  var keyCode = e.keyCode || e.which; 
+
+		  if (keyCode == 9) { 
+		    e.preventDefault(); 
+		    // call custom function here
+		  } 
+		})
+	</script>
+
+	<style type="text/css">
+		textarea{
+			width:100%;
+		    height:300px;
+		}
+		#addRuleButton{
+			margin-left: 30% ;
+		}
+		#container, #addRule{
+			margin-left: 30% ;
+			text-align:left;
+			margin-right: 15%
+		}
+/*		#submitButton{
+			margin-left: 70%;
+		}*/
+/*		form{
+			text-align: center;
+		}*/
+		h1{
+			text-align: center;
+		}
+	</style>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var value = 0
+			var proofNum = 0
+			var i 
+		  	$('#addButton').click(function () {
+		  	// 	for (i = 0; i < value; i++) {
+					// alert(i)
+		  	// 	}
+				var index = String(value)
+				alert(index)
+				value = value+1
+				var name_of_line = "text"+index+'[]'
+				// // alert(name_of_line)
+			  	// $( "body" ).data( "foo", 52 );
+
+			  	// $('<div>').attr('id','line').appendTo('#container')
+
+			  	// var index = $(this).attr("index")
+			  	// index = index + 1
+			  	// alert($( "body" ).data( "foo" ))
+
+			    var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+			    // $('<span></span>').appendTo('#container');
+			    var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+
+			    var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+			    // // $('<span></span>').appendTo('#container');
+			    var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+			    // $('<span></span>').appendTo('#container');
+			    $('<div></div>').appendTo('#container')
+
+			    $("#total_line").html("Total line is " + String(value))
+			});
+
+			$('#container').on("click",".addNewLine", function(){
+    			indexOfProof = $(this).attr('id');
+    			indexOfProof = indexOfProof.substr(indexOfProof.length-1);
+
+    			var name_of_line = "text"+indexOfProof+'[]'
+    			var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#proof'+indexOfProof);
+       			var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#proof'+indexOfProof);
+    			var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#proof'+indexOfProof);
+    			var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#proof'+indexOfProof);
+    			$('<div></div>').appendTo('#proof'+indexOfProof)
+
+
+    			// alert(123)
+    		});
+
+   //  		$("co").on("click", "p.test", function(){
+   //  			alert($(this).text());
+			// });
+
+
+		  	// create a new sub proof
+			$('#addProof').click(function () {
+				var index = String(proofNum)
+
+				// // alert(index)
+				proofNum = proofNum+1
+				var name_of_line = "text"+index+'[]'
+				var proofDivId = "proof"+index
+				var buttonID = "button"+index
+				var nameOfDiv = 'div'+index
+				// var divId = 
+
+				$('<div>').attr('id', proofDivId).attr('name',nameOfDiv).appendTo('#container');
+				if (index == '0') {
+					$('<br>').appendTo('#'+proofDivId)
+				}
+				$('<h>').html("New sub-proof:").appendTo('#'+proofDivId)
+				$('<br>').appendTo('#container')
+				var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('newProof').appendTo('#'+proofDivId);
+				var $input = $('<input/>').attr('type','button').attr('value','add new line').attr('id',buttonID).addClass('addNewLine').appendTo('#'+proofDivId);
+				// $('<div>').attr('id', proofDivId).attr('name',nameOfDiv).appendTo('#container');
+				$('<br>').appendTo('#'+proofDivId)
+
+
+				// $('#'+proofDivId).append("<p class='test'>click me </p>")
+				// // alert(name_of_line)
+			  	// $( "body" ).data( "foo", 52 );
+
+			  	// $('<div>').attr('id','line').appendTo('#container')
+
+			  	// var index = $(this).attr("index")
+			  	// index = index + 1
+			  	// alert($( "body" ).data( "foo" ))
+
+			    // var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+			    // // $('<span></span>').appendTo('#container');
+			    // var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+
+			    // var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+			    // // // $('<span></span>').appendTo('#container');
+			    // var $input = $('<input/>').attr('name', name_of_line).attr('type', 'text').addClass('detectTab').appendTo('#container');
+			    // // $('<span></span>').appendTo('#container');
+			    // $('<div></div>').appendTo('#container')
+
+			    // $("#total_line").html("Total line is " + String(value))
+			});
+
+			$('#addRuleButton').click(function(){
+				// $('<div>').attr('id','addRule').attr('name','addRule').appendTo('#container');
+				$('<h>').html("New rule:").appendTo('#addRule')
+				var $input = $('<input/>').attr('name', 'rules[]').attr('type', 'text').addClass('newRule').appendTo('#addRule');
+
+				$('<br>').appendTo('#addRule')
+			})
+
+		  // ===================================================================
+		  // this is for tab in brower 
+		  // ===================================================================
+		  // $(document).on('keydown', 'input.detectTab', function(e) { 
+		  //   var keyCode = e.keyCode || e.which; 
+		  //   if (keyCode == 9) { 
+		  //     e.preventDefault(); 
+		  //  // call custom function here
+		  //   	var start = this.selectionStart;
+		  //   	var end = this.selectionEnd;
+
+		  //   	// set textarea value to: text before caret + tab + text after caret
+		  //   	$(this).val($(this).val().substring(0, start)
+		  //               + "\t"
+		  //               + $(this).val().substring(end));
+
+		  //   	// put caret at right position again
+		  //   	this.selectionStart =
+		  //   	this.selectionEnd = start + 1;
+		  //   	var $div = $(this).next('div');
+		  //     	$div.html('tab pressed...');
+		  //     	setTimeout(function () { $div.html(''); }, 2000 );
+		    
+		  //   } 
+		  // });
+		});
+	</script>
+
+
+</head>
+<body>
+    <h1>PyLemma Onling coding</h1>
+    <!-- <h2>(it will be converted to uppercase)</h2> -->
+    <form action="." method="POST">
+		<!--<input type="text" name="text1">        
+        <input type="text" name="text2">
+        <input type="text" name="text2">
+
+        <textarea name="issue[body]" id="issue_body" placeholder="Leave a comment" aria-label="Comment body"></textarea> -->
+        <input type="button" value="Add new rules" id="addRuleButton">
+        <input type="button" value="Add new sub proof" id="addProof">
+	 	<input type="submit" name="my-form" id="submitButton" value="submit">
+
+        <div id="addRule" name="addRule"></div>
+	 	<!-- <input type="button" value="Add textbox" id="addButton"  /> -->
+	 	<div id="container" name="text123"></div>
+	 	<div id="total_line" name="line number"></div>
+    </form>
+
+</body>
+</html>
